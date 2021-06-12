@@ -15,16 +15,12 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            // 비영속
-            Member member = new Member();
-            member.setId(100L);
-            member.setName("HelloJPA");
-
-            // 영속
-            System.out.println("=== Before ===");
+            Member member = new Member(200L, "member200");
             em.persist(member);
-            System.out.println("=== After ===");
 
+            em.flush();
+
+            System.out.println("=================");
             tx.commit();
         } catch (Exception e){
             tx.rollback();
