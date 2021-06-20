@@ -18,14 +18,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            Order order = new Order();
+//            Order order = new Order();
 //            em.persist(order);
 
 //            OrderItem orderItem = new OrderItem();
 //            orderItem.setOrder(order);
 //            em.persist(orderItem);
 
-            order.addOrderItem(new OrderItem();
+//            order.addOrderItem(new OrderItem());
 
 
             tx.commit();
