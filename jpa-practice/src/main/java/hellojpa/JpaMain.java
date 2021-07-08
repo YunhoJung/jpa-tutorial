@@ -10,6 +10,7 @@ import javax.persistence.Persistence;
 import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -20,23 +21,31 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try{
-            Address address = new Address("city", "street", "1000");
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setHomeAddress(new Address("homeCity", "street", "10000"));
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setHomeAddress(address);
-            member1.setWorkPeriod(new Period());
-            em.persist(member1);
+            member.getFavoriteFoods().add("치킨");
+            member.getFavoriteFoods().add("족발");
+            member.getFavoriteFoods().add("피자");
 
-            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+            member.getAddressHistory().add(new AddressEntity("old1", "street", ""));
+            member.getAddressHistory().add(new AddressEntity("old2", "street", ""));
 
-            Member member2 = new Member();
-            member2.setUsername("member2");
-            member2.setHomeAddress(copyAddress);
-            member2.setWorkPeriod(new Period());
-            em.persist(member2);
+            em.persist(member);
 
-            member1.getHomeAddress().setCity("newCity");
+            em.flush();
+            em.clear();
+
+            System.out.println("========== START ==========");
+            Member findMember = em.find(Member.class, member.getId());
+//
+//            List<Address> addressHistory = findMember.getAddressHistory();
+//            for (Address address : addressHistory){
+//                System.out.println("address = " + address.getCity());
+//            }
+//
+//            Set<String> favoriteFoods = findMember.getFavoriteFoods();
 
             tx.commit();
 
