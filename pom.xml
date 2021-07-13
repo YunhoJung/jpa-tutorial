@@ -10,8 +10,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>jpa-practice</module>
-        <module>jpa-exercise1</module>
+<!--        <module>jpa-exercise1</module>-->
         <module>jpashop</module>
+        <module>jpql</module>
     </modules>
 
     <properties>
